@@ -1,7 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="18" fill="#F7FAF7"/>
-  <path d="M16 18.5c0-2.2 1.8-4 4-4h10c3.4 0 6 2.6 6 6v27.5c0 .9-.9 1.4-1.6.9-1.8-1.4-4-2.1-6.4-2.1H20c-2.2 0-4-1.8-4-4V18.5Z" fill="#FFFFFF" stroke="#4F9F83" stroke-width="3"/>
-  <path d="M48 18.5c0-2.2-1.8-4-4-4H34c-3.4 0-6 2.6-6 6v27.5c0 .9.9 1.4 1.6.9 1.8-1.4 4-2.1 6.4-2.1h8c2.2 0 4-1.8 4-4V18.5Z" fill="#FFFFFF" stroke="#4F9F83" stroke-width="3"/>
-  <path d="M32 18v31" stroke="#4F9F83" stroke-width="3" stroke-linecap="round"/>
-  <path d="M40 17v17l-4-3-4 3V20.5c0-1.9 1.6-3.5 3.5-3.5H40Z" fill="#65B99C"/>
+  <rect width="64" height="64" rx="16" fill="#f7f4ec"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="#4a6b52" stroke-opacity=".16" stroke-width="1.5"/>
+  <g fill="none" stroke="#4a6b52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 18C27 14 19 13 12 17C9 18.5 8 21 9 24C10 29 14 33 22 37C26 39.5 29.5 41.5 32 42C34.5 41.5 38 39.5 42 37C50 33 54 29 55 24C56 21 55 18.5 52 17C45 13 37 14 32 18Z"/>
+    <path d="M32 18v24"/>
+  </g>
+  <circle cx="32" cy="10.5" r="2.6" fill="#4a6b52"/>
 </svg>

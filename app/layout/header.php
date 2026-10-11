@@ -44,10 +44,10 @@ if (!$hideNav) {
     <title><?= e($pageTitle) ?> - 阅心</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
     <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
-    <meta name="theme-color" content="#f7f7f3">
+    <meta name="theme-color" content="#f7f4ec">
     <link rel="stylesheet" href="assets/css/app.css?v=<?= e($cssVersion) ?>">
     <script defer src="assets/js/app.js?v=<?= e($jsVersion) ?>"></script>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260521">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261012">
 </head>
 <body class="yx-page-<?= e(pathinfo($path, PATHINFO_FILENAME)) ?>">
 

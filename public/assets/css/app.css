@@ -4120,7 +4120,7 @@ body.yx-sheet-open {
 .yx-app-brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
   color: var(--yx-text);
   text-decoration: none;
   font-weight: 700;
@@ -4128,31 +4128,24 @@ body.yx-sheet-open {
   font-family: var(--yx-font-serif);
 }
 
-/* 品牌标识：一枚朱红「阅」字藏书印 */
-.yx-app-brand-mark {
-  position: relative;
-  width: 26px;
-  height: 26px;
-  border: 0;
-  border-radius: 2px;
-  background: var(--yx-danger);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, .45) inset;
-  display: grid;
-  place-items: center;
+/* 抵消末字后多出的字距，让品牌名视觉居中 */
+.yx-app-brand-name {
+  margin-right: -.2em;
 }
 
-.yx-app-brand-mark::after {
-  content: "阅";
-  position: static;
-  top: auto;
-  bottom: auto;
-  left: auto;
-  border-left: 0;
-  color: var(--yx-surface);
-  font-family: var(--yx-font-serif);
-  font-size: 15px;
-  line-height: 1;
-  font-weight: 600;
+/* 品牌标识：一笔墨线书 + 浓墨点，全站统一色系 */
+.yx-app-brand-mark {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%234a6b52' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M32 18C27 14 19 13 12 17C9 18.5 8 21 9 24C10 29 14 33 22 37C26 39.5 29.5 41.5 32 42C34.5 41.5 38 39.5 42 37C50 33 54 29 55 24C56 21 55 18.5 52 17C45 13 37 14 32 18Z'/%3E%3Cpath d='M32 18v24'/%3E%3C/g%3E%3Ccircle cx='32' cy='10.5' r='2.6' fill='%234a6b52'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: opacity .18s ease-out, transform .25s cubic-bezier(.16, 1, .3, 1);
+}
+
+.yx-app-brand:hover .yx-app-brand-mark {
+  opacity: .78;
+  transform: translateY(-1px);
 }
 
 .yx-desktop-nav {
@@ -5499,8 +5492,8 @@ html.yx-scrubber-dragging body {
   }
 
   .yx-app-brand-mark {
-    width: 23px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
   }
 
   .yx-page-title {
@@ -6225,17 +6218,17 @@ p {
   display: block;
 }
 
-/* —— 按钮统一 —— */
+/* —— 按钮统一：主操作用墨绿，红色只留给危险动作 —— */
 button,
 .btn,
 input[type="submit"],
 input[type="button"] {
   min-height: 38px;
   padding: 9px 16px;
-  border: 1px solid var(--yx-danger);
+  border: 1px solid var(--yx-primary);
   border-radius: var(--yx-radius-small);
   color: var(--yx-surface) !important;
-  background: var(--yx-danger);
+  background: var(--yx-primary);
   font-family: var(--yx-font-ui);
   font-size: var(--yx-text-sm);
   font-weight: 500;
@@ -6247,8 +6240,8 @@ button:hover,
 .btn:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover {
-  background: #9c3d34;
-  border-color: #9c3d34;
+  background: var(--yx-primary-ink);
+  border-color: var(--yx-primary-ink);
 }
 
 .btn.ghost,
@@ -6450,9 +6443,9 @@ tr:hover td {
   background: var(--yx-line-strong, var(--yx-muted));
 }
 
-/* —— 键盘可达性 —— */
+/* —— 键盘可达性：焦点环跟随主色 —— */
 :focus-visible {
-  outline: 2px solid var(--yx-danger);
+  outline: 2px solid var(--yx-primary);
   outline-offset: 2px;
 }
 
@@ -6464,6 +6457,156 @@ tr:hover td {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+  }
+}
+
+/* =============================================================
+   2026-10-11 红绿统一：把误用为“主色”的朱红全部收敛回墨绿。
+   红色只保留三类语义：品牌藏书印、危险操作（删除/清空/中止/退出）、
+   错误提示。其余 hover、选中态、小标题、图标一律走墨绿或茶色。
+   ============================================================= */
+
+/* 语义重申：危险按钮保持朱红（复刻统一层，防止被新全局按钮规则冲掉） */
+button.danger,
+.btn.danger,
+.danger button {
+  color: var(--yx-surface) !important;
+  background: var(--yx-danger);
+  border-color: var(--yx-danger);
+}
+
+button.danger:hover,
+.btn.danger:hover,
+.danger button:hover {
+  background: #9c3d34;
+  border-color: #9c3d34;
+}
+
+/* 次级按钮保持白底描边（复刻统一层） */
+.btn.ghost,
+button.ghost {
+  color: var(--yx-text-soft) !important;
+  background: transparent;
+  border: 1px solid var(--yx-line);
+}
+
+.btn.ghost:hover,
+button.ghost:hover {
+  color: var(--yx-text) !important;
+  background: var(--yx-surface-2);
+  border-color: var(--yx-line-strong, var(--yx-line));
+}
+
+/* 页头：导航下划线、退出链接 hover */
+.yx-desktop-nav a::after {
+  background: var(--yx-primary);
+}
+
+.yx-header-user a:hover {
+  color: var(--yx-primary-ink);
+  border-color: var(--yx-primary-ink);
+}
+
+/* 眉标小标题：红 → 墨绿 */
+.yx-eyebrow {
+  color: var(--yx-primary-ink);
+}
+
+/* 区块标题右侧链接 hover */
+.yx-section-heading > a:hover {
+  color: var(--yx-primary-ink);
+}
+
+/* 首页快捷操作图标 */
+.yx-home-actions span {
+  color: var(--yx-primary-ink);
+}
+
+/* 圆形主按钮：底色与 hover 统一墨绿 */
+.yx-round-add {
+  color: var(--yx-surface);
+  border-color: var(--yx-primary);
+  background: var(--yx-primary);
+}
+
+.yx-round-add:hover {
+  background: var(--yx-primary-ink);
+  border-color: var(--yx-primary-ink);
+}
+
+/* 搜索栏清除按钮 hover */
+.yx-records-search > a:hover {
+  color: var(--yx-primary-ink);
+}
+
+/* 卡片角标菜单 hover */
+.yx-card-menu summary:hover {
+  color: var(--yx-primary-ink);
+}
+
+/* 底部弹层：标题与关闭按钮 */
+.yx-sheet-head p {
+  color: var(--yx-primary-ink);
+}
+
+.yx-sheet-close:hover,
+.yx-image-export header button:hover {
+  color: var(--yx-primary-ink);
+  border-color: var(--yx-primary-ink);
+}
+
+/* 清除筛选项 ×：茶色收尾，不与删除操作混淆 */
+.yx-active-filter a {
+  color: var(--yx-accent);
+}
+
+/* 空状态图标：中性墨色 */
+.yx-empty-state > div {
+  color: var(--yx-muted);
+}
+
+/* 桌面记录页新增按钮（防止旧红色规则回潮） */
+.yx-round-add {
+  color: #fff !important;
+  border-color: var(--yx-primary) !important;
+  background: var(--yx-primary) !important;
+}
+
+.yx-round-add:hover {
+  background: var(--yx-primary-ink) !important;
+  border-color: var(--yx-primary-ink) !important;
+}
+
+/* 桌面记录页搜索按钮 */
+.yx-records-search button {
+  background: var(--yx-primary) !important;
+}
+
+/* 桌面记录页筛选 chips 选中态 */
+.yx-records-chips a.active {
+  color: #fff !important;
+  border-color: var(--yx-primary) !important;
+  background: var(--yx-primary) !important;
+}
+
+/* 触屏端：底部导航、菜单按钮 */
+@media (max-width: 820px) {
+  .yx-mobile-bottom-nav a.active {
+    color: var(--yx-primary-ink);
+  }
+
+  .yx-mobile-more:hover,
+  .yx-mobile-more:focus-visible {
+    color: var(--yx-primary-ink) !important;
+    border-color: var(--yx-primary-ink);
+    background: transparent;
+  }
+
+  .yx-mobile-more:active {
+    color: var(--yx-surface) !important;
+    background: var(--yx-primary);
+    border-color: var(--yx-primary);
+    transform: none;
   }
 }
 
