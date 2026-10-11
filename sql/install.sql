@@ -128,3 +128,41 @@ CREATE TABLE IF NOT EXISTS import_batches (
   CONSTRAINT fk_import_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   CONSTRAINT fk_import_plan FOREIGN KEY (history_plan_id) REFERENCES reading_plans(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 豆瓣信息补全：异步队列（由豆瓣功能触发时自动写入）
+CREATE TABLE IF NOT EXISTS douban_jobs (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  status VARCHAR(32) NOT NULL DEFAULT 'pending',
+  total INT NOT NULL DEFAULT 0,
+  done INT NOT NULL DEFAULT 0,
+  success INT NOT NULL DEFAULT 0,
+  failed INT NOT NULL DEFAULT 0,
+  skipped INT NOT NULL DEFAULT 0,
+  consecutive_failed INT NOT NULL DEFAULT 0,
+  current_book_id INT DEFAULT NULL,
+  current_title VARCHAR(255) DEFAULT NULL,
+  message TEXT DEFAULT NULL,
+  last_error TEXT DEFAULT NULL,
+  cancel_requested TINYINT(1) NOT NULL DEFAULT 0,
+  notified TINYINT(1) NOT NULL DEFAULT 0,
+  started_at DATETIME DEFAULT NULL,
+  finished_at DATETIME DEFAULT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_user_status (user_id, status),
+  KEY idx_updated_at (updated_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS douban_job_items (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  job_id BIGINT UNSIGNED NOT NULL,
+  book_id INT NOT NULL,
+  status VARCHAR(32) NOT NULL DEFAULT 'pending',
+  error TEXT DEFAULT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  message TEXT DEFAULT NULL,
+  UNIQUE KEY uniq_job_book (job_id, book_id),
+  KEY idx_job_status (job_id, status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
