@@ -1,0 +1,7 @@
+# Git 行尾规范化：Shell 脚本必须 LF，防止 Windows 编辑后 CRLF 导致脚本失效
+*.sh text eol=lf
+
+# 二进制文件不比较
+*.png binary
+*.jpg binary
+*.ico binary

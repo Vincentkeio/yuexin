@@ -1,0 +1,32 @@
+# 敏感信息：含数据库口令，禁止入库
+app/config.php
+app/config.php.bak*
+backups/
+
+# 运行产物
+storage/logs/
+storage/cache/
+storage/uploads/
+
+# 本机工具数据
+.workbuddy-ai/
+
+# 证书申请验证残留（一次性文件，任何层级）
+**/.well-known/
+
+# 宝塔站点隔离配置（open_basedir，含服务器路径）
+**/.user.ini
+
+# 本地调试 / 预览工作区
+preview/
+
+# 站长后台（单文件自包含，含数据库配置，独立部署于 admin 站点）
+deploy/
+
+# 各类本地备份文件
+*.bak*
+*_bak_*
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
