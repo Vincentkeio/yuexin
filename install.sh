@@ -33,7 +33,7 @@ INSTALL_DIR="${INSTALL_DIR:-/www/wwwroot/readlist}"
 DB_NAME="${DB_NAME:-readlist}"
 DB_USER="${DB_USER:-readlist}"
 DOMAIN="${DOMAIN:-}"
-REPO_SLUG="${REPO_SLUG:-CHANGE_ME/CHANGE_ME}"   # GitHub owner/repo，推送后由维护者填入
+REPO_SLUG="${REPO_SLUG:-Vincentkeio/yuexin}"   # GitHub owner/repo，推送后由维护者填入
 MIN_PHP_VER="8.1"
 
 # ------------------------------ 输出函数 ------------------------------------

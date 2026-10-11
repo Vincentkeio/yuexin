@@ -19,7 +19,7 @@
 安装 Nginx + PHP + MariaDB、拉取源码、建库导表、生成配置、配置 Nginx，可选申请 HTTPS 证书：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<owner>/<repo>/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Vincentkeio/yuexin/main/install.sh | bash
 ```
 
 安装过程中会询问站点域名（留空则用 IP 访问）。安装结束后会输出访问地址和数据库信息，
@@ -104,3 +104,7 @@ fileinfo
 ```
 
 其中 curl 用于豆瓣 URL 识别，zip/simplexml 用于 XLSX 标准表导入。
+
+## 许可证
+
+[MIT](LICENSE)
