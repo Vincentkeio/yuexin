@@ -16,6 +16,7 @@ if (!function_exists('yx_active')) {
 $path = current_path();
 $cssVersion = @filemtime(__DIR__ . '/../../public/assets/css/app.css') ?: '1';
 $jsVersion = @filemtime(__DIR__ . '/../../public/assets/js/app.js') ?: '1';
+$faviconVersion = @filemtime(__DIR__ . '/../../public/favicon.svg') ?: '1';
 $hideNav = in_array($path, ['login.php', 'register.php'], true);
 $pageTitle = $title ?? '阅心';
 
@@ -47,7 +48,7 @@ if (!$hideNav) {
     <meta name="theme-color" content="#f7f4ec">
     <link rel="stylesheet" href="assets/css/app.css?v=<?= e($cssVersion) ?>">
     <script defer src="assets/js/app.js?v=<?= e($jsVersion) ?>"></script>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261012">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=<?= e($faviconVersion) ?>">
 </head>
 <body class="yx-page-<?= e(pathinfo($path, PATHINFO_FILENAME)) ?>">
 
